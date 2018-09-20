@@ -13,7 +13,6 @@ describe 'apache::default' do
       runner.converge(described_recipe)
     end
 
-
     it 'installs the correct package' do
       expect(chef_run).to install_package('apache2')
     end
