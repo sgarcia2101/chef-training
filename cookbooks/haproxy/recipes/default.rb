@@ -5,7 +5,7 @@
 # Copyright:: 2018, The Authors, All Rights Reserved.
 package 'haproxy'
 
-allwebservers = search('node', 'role:web AND chef_environment:#{node.chef_environment}')
+allwebservers = search('node', "role:web AND chef_environment:#{node.chef_environment}")
 
 template '/etc/haproxy/haproxy.cfg' do
   source 'haproxy.cfg.erb'
