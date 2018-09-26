@@ -4,7 +4,7 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
-service 'httpd' do
+service node['apache']['service_name'] do
   action [:enable, :start]
 end
 
