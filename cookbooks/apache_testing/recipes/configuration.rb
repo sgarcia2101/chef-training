@@ -3,6 +3,6 @@
 # Recipe:: configuration
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
-file '/var/www/html/index.html' do
-  content '<h1>Welcome Home!</h1>'
+file node['apache']['file'] do
+  content node['apache']['file_content']
 end
