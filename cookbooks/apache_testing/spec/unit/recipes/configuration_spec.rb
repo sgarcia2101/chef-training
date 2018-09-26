@@ -18,10 +18,13 @@ describe 'apache::configuration' do
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
     end
-
+    
     it 'index file exists' do
+      expect(chef_run).to create_file('/var/www/html/index.html')
+    end
+
+    it 'index file has content' do
       expect(chef_run).to render_file('/var/www/html/index.html').with_content("Welcome Home!")
     end
-#    it { is_expected.to render_file('/var/www/html/index.html') }
   end
 end
