@@ -2,9 +2,7 @@ Ohai.plugin :Apache do
   provides 'apache/modules'
 
   collect_data :default do
-    apache(Mash.new)
-    modules_cmd = shell_out('apachectl -t -D DUMP_MODULES')
-    apache[:modules] = modules_cmd.stdout
+    apache(Mash.new)    
 
     so = shell_out("apachectl -v")
     # Sample output:
@@ -14,5 +12,8 @@ Ohai.plugin :Apache do
       output = so.stdout.split
       apache[:version] = output[2]
     end
+
+    modules_cmd = shell_out('apachectl -t -D DUMP_MODULES')
+    apache[:modules] = modules_cmd.stdout.gsub("Loaded Modules:\n ", "").gsub("\n ", "|").gsub("\n", "|").split("|")
   end
 end
