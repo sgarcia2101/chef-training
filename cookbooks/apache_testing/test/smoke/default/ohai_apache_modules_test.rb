@@ -1,18 +1,5 @@
-# # encoding: utf-8
+plugin_directory = '/tmp/kitchen/ohai/plugins'
 
-# Inspec test for recipe apache::ohai_apache_modules
-
-# The Inspec reference, with examples and extensive documentation, can be
-# found at http://inspec.io/docs/reference/resources/
-
-unless os.windows?
-  # This is an example test, replace with your own test.
-  describe user('root'), :skip do
-    it { should exist }
-  end
-end
-
-# This is an example test, replace it with your own test.
-describe port(80), :skip do
-  it { should_not be_listening }
+describe command("ohai -d #{plugin_directory} apache") do
+  its(:stdout) { should match(/core_module/) }
 end
