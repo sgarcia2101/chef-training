@@ -11,6 +11,9 @@ Ohai.plugin :Apache do
     if so.exitstatus == 0
       output = so.stdout.split
       apache[:version] = output[2]
+      if output.length >= 10
+        apache[:builddate] = "%s %s %s %s" % [output[6], output[7], output[8], output[9]]
+      end
     end
 
     modules_cmd = shell_out('apachectl -t -D DUMP_MODULES')
